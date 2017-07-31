@@ -19,14 +19,14 @@ int current_process(process p[],int n,int time)
 {
 	int i,c=0,pos,min=9999,a[100], min_at=p[pos].at ;
 
-	for(i=1;i<=n;i++)//for checking kon kon aye hai?agar aye toh unka a[i]=1
+	for(i=1;i<=n;i++)//for checking which processes are arrived;if arrived then a[i]=1
 	{
 		if(p[i].at<=time)
 			a[i]=1;
 		else a[i]=0;
 	}
 
-	for(i=1;i<=n;i++)//for checking ki kiskaa  bt sabse kam hai
+	for(i=1;i<=n;i++)//for checking minimum burst time
 	{
 		if(a[i]==1)
 		{
@@ -51,18 +51,19 @@ int current_process(process p[],int n,int time)
 	}
 	return pos;
 }
-int free_wait(process p[],int  n,int time)
+int free_wait(process p[],int n,int time)
 {
-	int i,c=0;
-	for(i=1;i<=n;i++)
-	{
-		if(p[i].at>time && p[i].flag==0)
-			c++;
-		else break;
-	}
-	if(c>0)
-		return 1 ;
-	else return 0;
+int i,c=0;
+for(i=1;i<=n;i++)
+{
+  if(p[i].at>time && p[i].flag==0)
+  c++;
+  if(p[i].at<=time && p[i].flag==0)
+  {
+   c=0;
+   break;
+   }
+
 }
 void main()
 {
